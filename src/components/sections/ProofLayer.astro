@@ -1,0 +1,39 @@
+﻿---
+import GlassCard from "../ui/GlassCard.astro";
+import SectionLabel from "../ui/SectionLabel.astro";
+import { veyraProfile } from "../../content/veyra-profile";
+---
+
+<section class="veyra-section" aria-labelledby="proof-layer-title">
+  <div class="veyra-shell">
+    <GlassCard>
+      <SectionLabel text="Future contract layer" />
+      <h2 id="proof-layer-title" class="veyra-section-title">
+        Testnet references will be added only after deployment.
+      </h2>
+      <p class="veyra-section-copy">
+        Veyra is prepared for a small registry contract, but this page does not display an address before it exists. The current stage is visual foundation and submission preparation.
+      </p>
+
+      <div class="veyra-status-list" aria-label="Contract status">
+        <div class="veyra-status-item">
+          <span>Network</span>
+          <span>{veyraProfile.network.name}</span>
+        </div>
+        <div class="veyra-status-item">
+          <span>Chain ID</span>
+          <span>{veyraProfile.network.chainId}</span>
+        </div>
+        <div class="veyra-status-item">
+          <span>Planned contract</span>
+          <span>{veyraProfile.network.contractName}</span>
+        </div>
+        <div class="veyra-status-item">
+          <span>Current status</span>
+          <span>{veyraProfile.network.contractStatus}</span>
+        </div>
+      </div>
+    </GlassCard>
+  </div>
+</section>
+

@@ -1,0 +1,71 @@
+---
+/**
+ * GuardianHero
+ * Primary Veyra identity surface for Alisa Kusumah.
+ *
+ * Mamah Sachan / Mamah Sichan guardrail:
+ * the guardian visual should feel alive and protective, but never noisy.
+ * Contract status remains pending until a real OPN Testnet deployment exists.
+ */
+interface Props {
+  profile: {
+    name: string;
+    eyebrow: string;
+    tagline: string;
+    builder: string;
+    season: string;
+    network: { name: string; chainId: string; contractStatus: string };
+  };
+}
+
+const { profile } = Astro.props;
+---
+
+<section class="hero-stage" aria-labelledby="veyra-title">
+  <div class="topline" aria-label="Veyra status">
+    <span class="brand-mini">VEYRA</span>
+    <span class="topline-divider"></span>
+    <span>{profile.builder}</span>
+    <span class="topline-dot" aria-hidden="true"></span>
+    <span>{profile.network.name}</span>
+  </div>
+
+  <div class="hero-grid">
+    <aside class="guardian-frame" aria-label="Veyra guardian visual">
+      <div class="frame-aura" aria-hidden="true"></div>
+      <video
+        class="guardian-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="/media/veyra-guardian-poster.webp"
+      >
+        <source src="/media/veyra-guardian-loop.mp4" type="video/mp4" />
+      </video>
+      <div class="guardian-overlay" aria-hidden="true"></div>
+      <div class="scanline" aria-hidden="true"></div>
+      <div class="guardian-caption">
+        <span>Guardian Seal</span>
+        <strong>Alisa Kusumah</strong>
+      </div>
+    </aside>
+
+    <div class="hero-copy">
+      <p class="micro-label">{profile.eyebrow}</p>
+      <h1 id="veyra-title" class="veyra-title"><span>{profile.name}</span></h1>
+      <p class="hero-tagline">{profile.tagline}</p>
+
+      <div class="identity-chips" aria-label="Veyra metadata summary">
+        <span>{profile.season}</span>
+        <span>Chain ID {profile.network.chainId}</span>
+        <span>{profile.network.contractStatus}</span>
+      </div>
+
+      <p class="hero-note">
+        A premium identity layer for Alisa Kusumah. Contract references stay pending until a real OPN Testnet deployment exists.
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+/**
+ * DossierRecord
+ * Public metadata panel for Veyra.
+ * Alisa Kusumah's submission record stays readable and verifiable;
+ * empty contract fields are intentional until deployment is real.
+ */
+interface Props {
+  profile: {
+    builder: string;
+    season: string;
+    network: {
+      name: string;
+      chainId: string;
+      contractName: string;
+      contractStatus: string;
+      contractAddress: string;
+    };
+  };
+}
+
+const { profile } = Astro.props;
+const rows = [
+  ['Builder', profile.builder],
+  ['Network', profile.network.name],
+  ['Chain ID', profile.network.chainId],
+  ['Contract', profile.network.contractName],
+  ['Status', profile.network.contractStatus],
+  ['Address', profile.network.contractAddress || 'Not linked yet'],
+  ['Submission', profile.season],
+];
+---
+
+<section class="dossier-panel" aria-labelledby="dossier-title">
+  <div class="panel-heading">
+    <p class="micro-label">Verified when real</p>
+    <h2 id="dossier-title">Dossier Record</h2>
+  </div>
+
+  <dl class="record-grid">
+    {rows.map(([label, value]) => (
+      <div class="record-row">
+        <dt>{label}</dt>
+        <dd>{value}</dd>
+      </div>
+    ))}
+  </dl>
+</section>

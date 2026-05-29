@@ -1,0 +1,28 @@
+---
+/**
+ * PrincipleStrip
+ * Three small rules that keep Veyra credible on GitHub and in public review.
+ * Mamah Sachan / Mamah Sichan energy stays here as quiet protection:
+ * identity, real references, and restraint before hype.
+ */
+interface Principle {
+  label: string;
+  text: string;
+}
+
+interface Props {
+  principles: readonly Principle[];
+}
+
+const { principles } = Astro.props;
+---
+
+<section class="principle-strip" aria-label="Veyra principles">
+  {principles.map((item) => (
+    <article class="principle-card">
+      <span></span>
+      <h3>{item.label}</h3>
+      <p>{item.text}</p>
+    </article>
+  ))}
+</section>

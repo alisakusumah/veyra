@@ -1,0 +1,10 @@
+/*
+ * Veyra design tokens.
+ * Alisa Kusumah's public palette stays restrained: obsidian base,
+ * violet guardian energy, and a tiny magenta accent for life.
+ */
+:root {
+  --veyra-obsidian: #050509;
+  --veyra-violet: #9f7cff;
+  --veyra-magenta: #ff4fd8;
+}

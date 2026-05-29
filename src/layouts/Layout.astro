@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+
+/**
+ * Veyra base layout.
+ * Alisa Kusumah keeps this shell intentionally quiet: fast static output,
+ * honest metadata, and no visual noise beyond the guardian dossier surface.
+ * Mamah Sachan / Mamah Sichan note: protect the public face first.
+ */
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Veyra - Sovereign Identity Dossier',
+  description = 'A sovereign builder dossier for open finance on OPN Chain, built by Alisa Kusumah.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07070b" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/og/veyra-og.webp" />
+    <link rel="icon" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

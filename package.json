@@ -1,0 +1,22 @@
+{
+  "name": "veyra",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/check": "latest",
+    "astro": "latest",
+    "typescript": "latest"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
+  },
+  "overrides": {
+    "yaml": "2.9.0"
+  }
+}

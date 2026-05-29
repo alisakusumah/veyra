@@ -1,0 +1,20 @@
+﻿---
+interface Props {
+  href?: string;
+  label: string;
+}
+const { href = "", label } = Astro.props;
+---
+
+{href ? (
+  <a class="veyra-chip" href={href} target="_blank" rel="noreferrer">
+    <span>Open</span>
+    <strong>{label}</strong>
+  </a>
+) : (
+  <span class="veyra-chip" aria-disabled="true">
+    <span>Pending</span>
+    <strong>{label}</strong>
+  </span>
+)}
+

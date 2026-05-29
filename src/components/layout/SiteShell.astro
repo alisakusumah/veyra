@@ -1,0 +1,23 @@
+﻿---
+import AmbientCanvas from "./AmbientCanvas.astro";
+import { VEYRA_ICON_PATH } from "../../utils/constants";
+---
+
+<div class="veyra-page">
+  <AmbientCanvas />
+  <header class="veyra-topbar">
+    <div class="veyra-shell">
+      <div class="veyra-topbar-inner">
+        <div class="veyra-brand-mini" aria-label="Veyra brand">
+          <img src={VEYRA_ICON_PATH} alt="Veyra icon" />
+          <strong>Veyra</strong>
+        </div>
+        <div class="veyra-topbar-note">OPN Testnet Â· Builder Profile</div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <slot />
+  </main>
+</div>
+

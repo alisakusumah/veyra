@@ -1,0 +1,744 @@
+/*
+ * Veyra premium UI system.
+ * Maintained in Alisa Kusumah's public voice: calm, protective, and honest.
+ *
+ * Mamah Sachan / Mamah Sichan guardrail:
+ * - keep violet motion subtle, never noisy;
+ * - keep public claims grounded;
+ * - protect the premium guardian dossier feeling before adding features.
+ */
+
+:root {
+  color-scheme: dark;
+  --bg: #050509;
+  --bg-soft: #0a0a12;
+  --ink: #f7f2ff;
+  --muted: rgba(247, 242, 255, 0.66);
+  --faint: rgba(247, 242, 255, 0.42);
+  --line: rgba(196, 181, 253, 0.18);
+  --violet: #9f7cff;
+  --violet-soft: rgba(159, 124, 255, 0.22);
+  --magenta: #ff4fd8;
+  --graphite: rgba(255, 255, 255, 0.075);
+  --shadow: 0 30px 120px rgba(0, 0, 0, 0.56);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(111, 66, 193, 0.28), transparent 28rem),
+    radial-gradient(circle at 78% 34%, rgba(255, 79, 216, 0.12), transparent 22rem),
+    linear-gradient(135deg, #040407 0%, #090913 48%, #050509 100%);
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  content: "";
+}
+
+body::before {
+  opacity: 0.2;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: linear-gradient(to bottom, black, transparent 82%);
+}
+
+body::after {
+  z-index: -1;
+  opacity: 0.32;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0 1px, transparent 1.5px);
+  background-size: 92px 92px;
+  animation: starDrift 18s linear infinite;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+.veyra-shell {
+  position: relative;
+  width: min(1180px, calc(100% - 32px));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 24px 0 64px;
+}
+
+/* Status capsule: tiny metadata, quiet pulse, no dashboard clutter. */
+.topline {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid rgba(196, 181, 253, 0.18);
+  border-radius: 999px;
+  color: rgba(247, 242, 255, 0.62);
+  background: rgba(5, 5, 10, 0.58);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 60px rgba(159, 124, 255, 0.1);
+  backdrop-filter: blur(18px);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.brand-mini {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.topline-divider {
+  width: 1px;
+  height: 16px;
+  background: var(--line);
+}
+
+.topline-dot {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: #a985ff;
+  box-shadow:
+    0 0 0 1px rgba(196, 181, 253, 0.24),
+    0 0 10px rgba(169, 133, 255, 0.75),
+    0 0 24px rgba(138, 92, 246, 0.42);
+  animation: pulseDot 3.35s ease-in-out infinite;
+}
+
+.topline-dot::after {
+  position: absolute;
+  inset: -7px;
+  border-radius: inherit;
+  content: "";
+  background: radial-gradient(circle, rgba(169, 133, 255, 0.42), transparent 64%);
+  opacity: 0.45;
+  animation: dotHalo 3.35s ease-in-out infinite;
+}
+
+.hero-stage {
+  position: relative;
+  padding-top: 18px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.88fr) minmax(300px, 1fr);
+  gap: clamp(34px, 6vw, 84px);
+  align-items: center;
+  min-height: clamp(600px, 78vh, 720px);
+}
+
+/* Guardian frame: the visual heart of Veyra. Keep this premium and cinematic. */
+.guardian-frame {
+  position: relative;
+  order: 2;
+  width: min(430px, 88vw);
+  aspect-ratio: 9 / 14;
+  justify-self: center;
+  overflow: hidden;
+  border: 1px solid rgba(216, 204, 255, 0.2);
+  border-radius: 34px;
+  background: linear-gradient(180deg, rgba(18, 16, 28, 0.85), rgba(8, 7, 12, 0.92));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 54px rgba(159, 124, 255, 0.22),
+    0 44px 140px rgba(0, 0, 0, 0.76);
+  transform: translateZ(0);
+}
+
+
+.guardian-frame::before {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  content: "";
+  border-radius: inherit;
+  border: 1px solid rgba(196, 181, 253, 0.18);
+  box-shadow: 0 0 28px rgba(159, 124, 255, 0.14), inset 0 0 34px rgba(159, 124, 255, 0.06);
+  opacity: 0.72;
+  animation: violetFlicker 5.4s ease-in-out infinite;
+}
+
+.frame-aura {
+  position: absolute;
+  inset: -28%;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(159, 124, 255, 0.38), transparent 26%),
+    radial-gradient(circle at 52% 74%, rgba(255, 79, 216, 0.18), transparent 32%);
+  filter: blur(24px);
+  animation: auraBreath 6.5s ease-in-out infinite;
+}
+
+.guardian-video,
+.guardian-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.guardian-video {
+  opacity: 0.92;
+  filter: saturate(1.08) contrast(1.06) brightness(0.82);
+}
+
+.guardian-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 9, 0.12), rgba(5, 5, 9, 0.5)),
+    radial-gradient(circle at 50% 28%, transparent 0 30%, rgba(5, 5, 9, 0.38) 68%);
+}
+
+.scanline {
+  position: absolute;
+  inset: -40% 0;
+  background: linear-gradient(180deg, transparent, rgba(198, 181, 255, 0.28), transparent);
+  opacity: 0.55;
+  transform: translateY(-50%);
+  animation: scanMove 5.8s ease-in-out infinite;
+}
+
+.guardian-caption {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  left: 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 13px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(4, 4, 8, 0.52);
+  backdrop-filter: blur(18px);
+}
+
+.guardian-caption span,
+.guardian-caption strong {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.guardian-caption span {
+  color: var(--faint);
+}
+
+.guardian-caption strong {
+  color: var(--ink);
+}
+
+.hero-copy {
+  order: 1;
+  max-width: 600px;
+  padding: 28px 0;
+}
+
+.micro-label {
+  margin: 0 0 18px;
+  color: var(--violet);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 16px;
+  max-width: 9ch;
+  font-size: clamp(3.65rem, 8.6vw, 7.05rem);
+  font-weight: 660;
+  letter-spacing: -0.036em;
+  line-height: 0.98;
+}
+
+/* Title treatment: violet shimmer must highlight Veyra without clipping the letters. */
+.veyra-title {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.veyra-title span {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  color: transparent;
+  background: linear-gradient(135deg, #fffaff 0%, #f0e8ff 42%, #c7b4ff 72%, #9f7cff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 18px rgba(159, 124, 255, 0.18),
+    0 0 42px rgba(116, 64, 214, 0.14);
+  animation: titleBreath 5.6s ease-in-out infinite;
+}
+
+.veyra-title::before {
+  position: absolute;
+  inset: -10% -8% -4%;
+  z-index: 0;
+  content: "";
+  border-radius: 999px;
+  background: radial-gradient(ellipse at 42% 54%, rgba(159, 124, 255, 0.2), transparent 64%);
+  filter: blur(26px);
+  opacity: 0.56;
+  animation: titleAura 6.2s ease-in-out infinite;
+}
+
+.veyra-title::after {
+  position: absolute;
+  inset: -10% -14%;
+  z-index: 3;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(112deg, transparent 0 32%, rgba(255,255,255,0.04) 42%, rgba(201, 171, 255, 0.42) 49%, rgba(255,255,255,0.08) 54%, transparent 66% 100%);
+  filter: blur(7px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(-128%) skewX(-14deg);
+  animation: titleShimmer 7.4s ease-in-out infinite;
+}
+
+.hero-tagline {
+  max-width: 620px;
+  margin-bottom: 26px;
+  color: rgba(247, 242, 255, 0.78);
+  font-size: clamp(1.04rem, 1.92vw, 1.58rem);
+  font-weight: 390;
+  letter-spacing: -0.012em;
+  line-height: 1.42;
+}
+
+.identity-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.identity-chips span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid rgba(196, 181, 253, 0.16);
+  border-radius: 999px;
+  color: rgba(247, 242, 255, 0.66);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-note {
+  max-width: 520px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.76;
+}
+
+/* Dossier panel: public facts only, verified when real. */
+.dossier-panel {
+  position: relative;
+  margin-top: -4px;
+  padding: clamp(24px, 4.6vw, 42px);
+  overflow: hidden;
+  border: 1px solid rgba(196, 181, 253, 0.16);
+  border-radius: 30px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.018)),
+    rgba(7, 7, 13, 0.72);
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.dossier-panel::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(159, 124, 255, 0.12), transparent);
+  opacity: 0.8;
+  transform: translateX(-100%);
+  animation: panelGlint 7.5s ease-in-out infinite;
+}
+
+.panel-heading {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.panel-heading h2 {
+  margin: 0;
+  margin-top: 8px;
+  font-size: clamp(1.34rem, 2.05vw, 2.05rem);
+  letter-spacing: -0.018em;
+  line-height: 1.12;
+}
+
+.record-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(216, 204, 255, 0.08);
+  border-radius: 22px;
+  background: rgba(216, 204, 255, 0.055);
+}
+
+.record-row {
+  min-height: 108px;
+  padding: 17px 18px;
+  background: linear-gradient(180deg, rgba(10, 10, 18, 0.74), rgba(4, 4, 8, 0.68));
+}
+
+.record-row dt {
+  margin-bottom: 16px;
+  color: rgba(247, 242, 255, 0.38);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.record-row dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 0.9rem;
+  line-height: 1.48;
+}
+
+/* Principle strip: small rules that protect Alisa Kusumah from hype-driven wording. */
+.principle-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.principle-card {
+  position: relative;
+  min-height: 142px;
+  padding: 21px 22px;
+  overflow: hidden;
+  border: 1px solid rgba(196, 181, 253, 0.12);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(159, 124, 255, 0.075), transparent 44%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.014));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.045), 0 18px 70px rgba(0,0,0,0.24);
+}
+
+.principle-card span {
+  display: block;
+  width: 24px;
+  height: 1px;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, var(--violet), rgba(255, 79, 216, 0.55));
+  box-shadow: 0 0 14px rgba(159, 124, 255, 0.58);
+}
+
+.principle-card h3 {
+  margin-bottom: 12px;
+  font-size: 0.98rem;
+  letter-spacing: -0.012em;
+}
+
+.principle-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(115deg, transparent 0 42%, rgba(159, 124, 255, 0.075) 50%, transparent 58% 100%);
+  opacity: 0;
+  transform: translateX(-30%);
+  transition: opacity 420ms ease, transform 900ms ease;
+}
+
+.principle-card:hover::before {
+  opacity: 1;
+  transform: translateX(32%);
+}
+
+.principle-card::after {
+  position: absolute;
+  inset: auto 22px 0;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(159, 124, 255, 0.38), transparent);
+  opacity: 0.35;
+}
+
+.principle-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.68;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 0.62;
+    transform: scale(0.92);
+    box-shadow:
+      0 0 0 1px rgba(196, 181, 253, 0.18),
+      0 0 8px rgba(169, 133, 255, 0.42),
+      0 0 18px rgba(138, 92, 246, 0.22);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.16);
+    box-shadow:
+      0 0 0 1px rgba(216, 204, 255, 0.34),
+      0 0 14px rgba(180, 146, 255, 0.9),
+      0 0 32px rgba(138, 92, 246, 0.48);
+  }
+}
+
+@keyframes dotHalo {
+  0%, 100% { opacity: 0.18; transform: scale(0.72); }
+  50% { opacity: 0.62; transform: scale(1.16); }
+}
+
+@keyframes titleBreath {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.055); }
+}
+
+@keyframes titleAura {
+  0%, 100% { opacity: 0.42; transform: scale(0.96); }
+  50% { opacity: 0.78; transform: scale(1.04); }
+}
+
+@keyframes titleShimmer {
+  0%, 64%, 100% {
+    opacity: 0;
+    transform: translateX(-128%) skewX(-14deg);
+  }
+  10% { opacity: 0.16; }
+  24% {
+    opacity: 0.52;
+    transform: translateX(132%) skewX(-14deg);
+  }
+  30% { opacity: 0; }
+}
+
+@keyframes auraBreath {
+  0%, 100% { opacity: 0.42; transform: scale(0.96); }
+  50% { opacity: 0.78; transform: scale(1.04); }
+}
+
+@keyframes scanMove {
+  0% { transform: translateY(-70%); opacity: 0; }
+  18% { opacity: 0.42; }
+  52% { opacity: 0.7; }
+  100% { transform: translateY(72%); opacity: 0; }
+}
+
+@keyframes violetFlicker {
+  0%, 100% { opacity: 0.42; filter: brightness(0.92); }
+  38% { opacity: 0.72; filter: brightness(1.08); }
+  48% { opacity: 0.5; filter: brightness(0.96); }
+  66% { opacity: 0.84; filter: brightness(1.1); }
+}
+
+@keyframes panelGlint {
+  0%, 45% { transform: translateX(-120%); opacity: 0; }
+  58% { opacity: 0.75; }
+  100% { transform: translateX(120%); opacity: 0; }
+}
+
+@keyframes starDrift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-92px, 92px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .veyra-shell {
+    width: min(100% - 24px, 720px);
+    padding-top: 16px;
+  }
+
+  /* Status capsule: tiny metadata, quiet pulse, no dashboard clutter. */
+.topline {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    min-height: auto;
+    padding: 28px 0 12px;
+  }
+
+  .guardian-frame,
+  .hero-copy {
+    order: initial;
+  }
+
+  /* Guardian frame: the visual heart of Veyra. Keep this premium and cinematic. */
+.guardian-frame {
+    width: min(360px, 92vw);
+  }
+
+  .hero-copy {
+    padding: 0;
+    text-align: center;
+  }
+
+  h1 {
+    max-width: none;
+    font-size: clamp(3.3rem, 16.2vw, 5.25rem);
+  }
+
+  .identity-chips {
+    justify-content: center;
+  }
+
+  .hero-note {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .panel-heading {
+    display: block;
+  }
+
+  .record-grid,
+  /* Principle strip: small rules that protect Alisa Kusumah from hype-driven wording. */
+.principle-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .record-row {
+    min-height: auto;
+  }
+}
+
+/* ===============================
+   VEYRA v0.8.6 TITLE CLARITY FIX
+   Keep the violet premium glow, but prevent the descender of the "y"
+   from being visually clipped or covered by the shimmer layer.
+   =============================== */
+
+.veyra-title {
+  overflow: visible;
+  line-height: 1.08;
+  padding-bottom: 0.055em;
+}
+
+.veyra-title span,
+.veyra-title__text {
+  position: relative;
+  z-index: 3;
+  overflow: visible;
+  padding-bottom: 0.035em;
+}
+
+.veyra-title::before {
+  inset: -12% -9% -18%;
+  z-index: 0;
+  opacity: 0.48;
+  filter: blur(30px);
+}
+
+.veyra-title::after {
+  inset: -10% -12% -18%;
+  z-index: 1;
+  opacity: 0;
+  filter: blur(8px);
+}
+
+@keyframes titleShimmer {
+  0%,
+  74%,
+  100% {
+    transform: translateX(-135%) skewX(-14deg);
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 0.14;
+  }
+
+  26% {
+    transform: translateX(140%) skewX(-14deg);
+    opacity: 0.34;
+  }
+
+  32% {
+    opacity: 0;
+  }
+}
+
+@keyframes titleBreath {
+  0%,
+  100% {
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 14px rgba(159, 124, 255, 0.14),
+      0 0 32px rgba(116, 64, 214, 0.10);
+    filter: brightness(1);
+  }
+
+  50% {
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.12),
+      0 0 18px rgba(174, 137, 255, 0.24),
+      0 0 42px rgba(116, 64, 214, 0.16);
+    filter: brightness(1.025);
+  }
+}

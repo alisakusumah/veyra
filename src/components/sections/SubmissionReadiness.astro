@@ -1,0 +1,25 @@
+﻿---
+import GlassCard from "../ui/GlassCard.astro";
+import HonestLinkButton from "../ui/HonestLinkButton.astro";
+import SectionLabel from "../ui/SectionLabel.astro";
+import { veyraProfile } from "../../content/veyra-profile";
+---
+
+<section class="veyra-section" aria-labelledby="readiness-title">
+  <div class="veyra-shell">
+    <GlassCard>
+      <SectionLabel text="Submission profile" />
+      <h2 id="readiness-title" class="veyra-section-title">
+        The page stays quiet until each reference is real.
+      </h2>
+      <p class="veyra-section-copy">
+        Demo and repository links should be connected after they are ready. Until then, Veyra presents the identity, scope, and deployment plan without pretending to be further than it is.
+      </p>
+      <div class="veyra-reference-row" style="justify-content:flex-start">
+        <HonestLinkButton href={veyraProfile.links.demoUrl} label="Demo URL" />
+        <HonestLinkButton href={veyraProfile.links.repositoryUrl} label="Repository URL" />
+      </div>
+    </GlassCard>
+  </div>
+</section>
+

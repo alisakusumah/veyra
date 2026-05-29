@@ -1,0 +1,28 @@
+﻿---
+import GlassCard from "../ui/GlassCard.astro";
+import SectionLabel from "../ui/SectionLabel.astro";
+import { veyraProfile } from "../../content/veyra-profile";
+---
+
+<section class="veyra-section" aria-labelledby="roadmap-title">
+  <div class="veyra-shell">
+    <GlassCard>
+      <SectionLabel text="Roadmap" />
+      <h2 id="roadmap-title" class="veyra-section-title">
+        Small steps, visible progress, no inflated promises.
+      </h2>
+      <div class="veyra-roadmap">
+        {veyraProfile.roadmap.map((item) => (
+          <article class="veyra-roadmap-item">
+            <div class="veyra-roadmap-index">{item.phase}</div>
+            <div>
+              <h3 class="veyra-roadmap-title">{item.title}</h3>
+              <p class="veyra-roadmap-detail">{item.detail}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </GlassCard>
+  </div>
+</section>
+

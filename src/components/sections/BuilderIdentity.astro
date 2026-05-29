@@ -1,0 +1,30 @@
+﻿---
+import GlassCard from "../ui/GlassCard.astro";
+import SectionLabel from "../ui/SectionLabel.astro";
+import { veyraProfile } from "../../content/veyra-profile";
+---
+
+<section class="veyra-section" aria-labelledby="builder-identity-title">
+  <div class="veyra-shell veyra-identity-grid">
+    <GlassCard>
+      <SectionLabel text="Identity" />
+      <h2 id="builder-identity-title" class="veyra-section-title">
+        A restrained profile for a serious builder presence.
+      </h2>
+      <p class="veyra-section-copy">
+        Veyra is shaped as a public product profile for {veyraProfile.builder}. It keeps the visual language calm, the references clear, and the claims limited to what the project can actually show.
+      </p>
+    </GlassCard>
+
+    <GlassCard>
+      <SectionLabel text="Position" />
+      <h2 class="veyra-section-title">
+        Open finance, presented with less noise.
+      </h2>
+      <p class="veyra-section-copy">
+        The first release focuses on a polished static demo and a clean submission story. Contract references stay visibly pending until the OPN Testnet deployment is real.
+      </p>
+    </GlassCard>
+  </div>
+</section>
+

@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GuardianHero from '../components/sections/GuardianHero.astro';
+import DossierRecord from '../components/sections/DossierRecord.astro';
+import PrincipleStrip from '../components/sections/PrincipleStrip.astro';
+import { veyraProfile } from '../content/veyra-profile';
+
+/**
+ * Veyra single-page dossier.
+ * Built to present Alisa Kusumah with restraint: one strong identity surface,
+ * one honest record panel, and one principle strip. No dashboard filler.
+ */
+---
+
+<Layout>
+  <main class="veyra-shell">
+    <GuardianHero profile={veyraProfile} />
+    <DossierRecord profile={veyraProfile} />
+    <PrincipleStrip principles={veyraProfile.principles} />
+  </main>
+</Layout>

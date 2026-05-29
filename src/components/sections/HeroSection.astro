@@ -1,0 +1,27 @@
+﻿---
+import StatusPill from "../ui/StatusPill.astro";
+import { veyraProfile } from "../../content/veyra-profile";
+import { VEYRA_ICON_PATH } from "../../utils/constants";
+---
+
+<section class="veyra-hero" aria-labelledby="veyra-title">
+  <div class="veyra-shell">
+    <div class="veyra-hero-card">
+      <div class="veyra-emblem-wrap">
+        <img class="veyra-emblem" src={VEYRA_ICON_PATH} alt="Veyra anime guardian icon" />
+      </div>
+
+      <p class="veyra-kicker">Built by {veyraProfile.builder}</p>
+      <h1 id="veyra-title" class="veyra-title">{veyraProfile.name}</h1>
+      <p class="veyra-tagline">{veyraProfile.tagline}</p>
+      <p class="veyra-statement">{veyraProfile.statement}</p>
+
+      <div class="veyra-reference-row" aria-label="Veyra core references">
+        {veyraProfile.references.map((item) => (
+          <StatusPill label={item.label} value={item.value} />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
