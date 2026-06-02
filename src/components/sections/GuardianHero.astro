@@ -130,6 +130,9 @@ try {
         >
           Deploy Veyra
         </a>
+        <button id="connect-wallet-btn" class="veyra-btn veyra-btn-secondary" style="border-color: rgba(180, 146, 255, 0.5);">
+          Connect Wallet
+        </button>
         <a 
           href={profile.links.repositoryUrl}
           target="_blank" 
@@ -142,3 +145,30 @@ try {
     </div>
   </div>
 </section>
+
+<script>
+  const walletBtn = document.getElementById('connect-wallet-btn');
+  if (walletBtn) {
+    walletBtn.addEventListener('click', async () => {
+      // @ts-ignore
+      if (typeof window.ethereum !== 'undefined' || typeof window.okxwallet !== 'undefined') {
+        try {
+          // @ts-ignore
+          const provider = window.okxwallet || window.ethereum;
+          const accounts = await provider.request({ method: 'eth_requestAccounts' });
+          if (accounts && accounts.length > 0) {
+            const acc = accounts[0];
+            walletBtn.textContent = `${acc.substring(0, 6)}...${acc.substring(acc.length - 4)}`;
+            walletBtn.style.background = 'rgba(180, 146, 255, 0.15)';
+            walletBtn.style.color = '#fffaff';
+            walletBtn.style.boxShadow = '0 0 15px rgba(180, 146, 255, 0.3)';
+          }
+        } catch (error) {
+          console.error("Wallet connection rejected or failed", error);
+        }
+      } else {
+        alert("Please install a Web3 wallet like OKX Wallet or MetaMask to connect.");
+      }
+    });
+  }
+</script>
