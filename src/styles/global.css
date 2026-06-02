@@ -718,10 +718,11 @@ h1 {
 }
 
 .verified-icon-badge {
-  position: absolute;
-  top: 0;
-  right: -0.55em;
+  position: relative;
   display: inline-flex;
+  vertical-align: baseline;
+  bottom: 0.2em;
+  margin-left: 0.1em;
   color: #c7b4ff;
   width: 0.4em;
   height: 0.4em;
