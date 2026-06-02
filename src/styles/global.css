@@ -800,6 +800,7 @@ h1 {
   align-items: center;
   justify-content: center;
   padding: 12px 28px;
+  text-decoration: none;
   border-radius: 999px;
   font-size: 0.76rem;
   font-weight: 700;
