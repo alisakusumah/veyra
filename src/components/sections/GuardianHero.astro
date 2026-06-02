@@ -5,7 +5,6 @@
  *
  * Mamah Sachan / Mamah Sichan guardrail:
  * the guardian visual should feel alive and protective, but never noisy.
- * Contract status remains pending until a real OPN Testnet deployment exists.
  */
 interface Props {
   profile: {
@@ -14,11 +13,51 @@ interface Props {
     tagline: string;
     builder: string;
     season: string;
-    network: { name: string; chainId: string; contractStatus: string };
+    network: { name: string; chainId: string; contractStatus: string; contractAddress: string };
+    links: { demoUrl: string; repositoryUrl: string };
   };
 }
 
 const { profile } = Astro.props;
+
+// --- ON-CHAIN VERIFICATION (ZERO-JS CLIENT SIDE, EXECUTED AT BUILD TIME) ---
+let isVerified = false;
+
+try {
+  const response = await fetch("https://testnet-rpc.iopn.tech", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      method: "eth_call",
+      params: [{
+        to: profile.network.contractAddress,
+        data: "0xc395f857" // keccak256("repositoryUrl()")
+      }, "latest"],
+      id: 1
+    })
+  });
+  
+  const rpcData = await response.json();
+  
+  if (rpcData.result && rpcData.result !== "0x") {
+    // Decode ABI string manually (Zero dependencies!)
+    const hex = rpcData.result.slice(2);
+    const length = parseInt(hex.slice(64, 128), 16);
+    const stringHex = hex.slice(128, 128 + length * 2);
+    
+    let onChainRepo = "";
+    for (let i = 0; i < stringHex.length; i += 2) {
+      onChainRepo += String.fromCharCode(parseInt(stringHex.substring(i, i + 2), 16));
+    }
+    
+    if (onChainRepo === profile.links.repositoryUrl) {
+      isVerified = true;
+    }
+  }
+} catch (e) {
+  console.error("Failed to verify contract on-chain:", e);
+}
 ---
 
 <section class="hero-stage" aria-labelledby="veyra-title">
@@ -48,13 +87,25 @@ const { profile } = Astro.props;
       <div class="scanline" aria-hidden="true"></div>
       <div class="guardian-caption">
         <span>Guardian Seal</span>
-        <strong>Alisa Kusumah</strong>
+        <strong>{profile.builder}</strong>
       </div>
     </aside>
 
     <div class="hero-copy">
       <p class="micro-label">{profile.eyebrow}</p>
-      <h1 id="veyra-title" class="veyra-title"><span>{profile.name}</span></h1>
+      
+      <h1 id="veyra-title" class="veyra-title">
+        <span class="veyra-title__text">{profile.name}</span>
+        {isVerified && (
+          <span class="verified-icon-badge" title="Cryptographically Verified on OPN Chain" aria-label="On-Chain Verified">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 7V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V7L12 2Z" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        )}
+      </h1>
+      
       <p class="hero-tagline">{profile.tagline}</p>
 
       <div class="identity-chips" aria-label="Veyra metadata summary">
@@ -64,8 +115,30 @@ const { profile } = Astro.props;
       </div>
 
       <p class="hero-note">
-        A premium identity layer for Alisa Kusumah. Contract references stay pending until a real OPN Testnet deployment exists.
+        {isVerified 
+          ? `A premium sovereign identity layer for ${profile.builder}. This profile is cryptographically verified against the deployed registry on OPN Testnet.`
+          : `A premium identity layer for ${profile.builder}. Contract references stay pending until a real OPN Testnet deployment exists.`
+        }
       </p>
+
+      <div class="hero-actions" aria-label="Action buttons">
+        <a 
+          href={`https://vercel.com/new/clone?repository-url=${encodeURIComponent(profile.links.repositoryUrl)}`}
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="veyra-btn veyra-btn-primary"
+        >
+          Deploy Veyra
+        </a>
+        <a 
+          href={profile.links.repositoryUrl}
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="veyra-btn veyra-btn-secondary"
+        >
+          View Source
+        </a>
+      </div>
     </div>
   </div>
 </section>

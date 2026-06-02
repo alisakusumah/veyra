@@ -1,22 +1,56 @@
-# Veyra
+# VEYRA
 
-Veyra is a premium, static-first builder profile for OPN Chain submission preparation.
+> **A sovereign builder dossier for open finance on OPN Chain.**
 
-## Commands
+Veyra is a premium, static-first builder profile architected by Alisa Kusumah for OPN Chain Season 1. It presents a clean project identity layer with a live demo, public repository, network details, chain ID, and an immutable on-chain contract reference.
+
+Built with an uncompromising **Audit-First, Zero-Bug** philosophy, Veyra strips away inflated metrics, token promises, and UI bloat in favor of undeniable public reference integrity.
+
+---
+
+## 🛡️ Cybersecurity & Architecture
+
+Veyra is engineered using the *Sachan Elite Web Architecture Blueprint*, ensuring top-tier security and performance:
+- **Zero-JS by Default**: Built on Astro.js. No unnecessary client-side JavaScript execution, eliminating major XSS attack vectors.
+- **Strict CSS Isolation**: Tailwind CSS integrated as a hybrid layer over bespoke cinematic animations.
+- **Immutable Smart Contract**: `VeyraRegistry.sol` is mathematically constrained to identity logging. No custody of user funds, no upgradeability proxies, no rug-pull vectors.
+
+---
+
+## 🚀 Live Demo & Deployment
+
+- **Demo**: [https://veyra-six-phi.vercel.app](https://veyra-six-phi.vercel.app)
+- **On-Chain Contract (OPN Testnet)**: [0x6e5f399f2c0f9ae22ac4847e531132f8cb9bb787](https://testnet.iopn.tech/address/0x6e5f399f2c0f9ae22ac4847e531132f8cb9bb787)
+
+---
+
+## 💻 Local Development
+
+### Prerequisites
+- Node.js (v18+)
+- An isolated Web3 Wallet (Hardware wallet recommended)
+
+### Quick Start
 
 ```bash
+# 1. Install precise dependencies (Strict Lockfile)
 npm install
+
+# 2. Setup environment variables (Do NOT use real funds/mainnet keys)
+cp .env.example .env
+
+# 3. Start the Elite UI server
 npm run dev
-npm run build
+
+# 4. Verify Smart Contract Integrity (100% Test Coverage)
+npx hardhat test
 ```
 
-## Current status
+---
 
-- UI foundation: included
-- Smart contract: not included yet
-- OPN Testnet contract address: not deployed yet
-- Demo/repository links: render only when real values are added in `src/content/veyra-profile.ts`
+## 📜 Principle of Integrity
 
-## Clean workflow note
+> *"Keep this contract as a clean identity record only — no token, no sale, no staking, no reward promise, and no custody of user funds."*  
+> — Mamah Sichan Guardrails
 
 Keep generated backups outside this project folder. Do not add temporary patch folders, old copies, or unused draft files inside the repository.

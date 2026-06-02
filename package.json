@@ -14,7 +14,17 @@
     "typescript": "latest"
   },
   "devDependencies": {
-    "sharp": "^0.34.5"
+    "@nomicfoundation/hardhat-chai-matchers": "^3.0.0",
+    "@nomicfoundation/hardhat-ethers": "^4.0.12",
+    "@nomicfoundation/hardhat-ignition-ethers": "^3.1.5",
+    "@types/chai": "^5.2.3",
+    "@types/node": "^25.9.1",
+    "chai": "^6.2.2",
+    "dotenv": "^17.4.2",
+    "ethers": "^6.16.0",
+    "hardhat": "^3.7.0",
+    "sharp": "^0.34.5",
+    "viem": "^2.51.3"
   },
   "overrides": {
     "yaml": "2.9.0"

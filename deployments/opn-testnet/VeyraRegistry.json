@@ -1,0 +1,12 @@
+{
+  "contractName": "VeyraRegistry",
+  "network": "OPN Testnet",
+  "chainId": 984,
+  "deployer": "0x0E13D75012055329CBF5F21C9baD8141E80489E7",
+  "transactionHash": "0x2ccd4827509c352c96dcb53d7491f9355141c2c1cb9e31b267c2e6eb3a523cca",
+  "contractAddress": "0x6e5f399f2c0f9ae22ac4847e531132f8cb9bb787",
+  "explorer": "https://testnet.iopn.tech/address/0x6e5f399f2c0f9ae22ac4847e531132f8cb9bb787",
+  "demoUrl": "https://veyra-six-phi.vercel.app",
+  "repositoryUrl": "https://github.com/alisakusumah/veyra",
+  "deployedAt": "2026-06-02T10:36:26.777Z"
+}

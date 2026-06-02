@@ -15,6 +15,7 @@ interface Props {
       contractName: string;
       contractStatus: string;
       contractAddress: string;
+      explorerUrl?: string;
     };
   };
 }
@@ -29,6 +30,11 @@ const rows = [
   ['Address', profile.network.contractAddress || 'Not linked yet'],
   ['Submission', profile.season],
 ];
+
+const shortenAddress = (addr: string) => {
+  if (!addr || addr.length !== 42) return addr;
+  return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+};
 ---
 
 <section class="dossier-panel" aria-labelledby="dossier-title">
@@ -41,7 +47,15 @@ const rows = [
     {rows.map(([label, value]) => (
       <div class="record-row">
         <dt>{label}</dt>
-        <dd>{value}</dd>
+        <dd>
+          {label === 'Address' && profile.network.explorerUrl ? (
+            <a href={profile.network.explorerUrl} target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors duration-300 underline decoration-white/10 hover:decoration-accent/50 underline-offset-4">
+              {shortenAddress(value)}
+            </a>
+          ) : (
+            value
+          )}
+        </dd>
       </div>
     ))}
   </dl>

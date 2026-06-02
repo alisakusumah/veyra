@@ -1,0 +1,46 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_28-b0e9c7ccc85a977ba891b279846a98193607bdf1",
+  "solcVersion": "0.8.28",
+  "solcLongVersion": "0.8.28+commit.7893614a",
+  "compilerType": "solc",
+  "userSourceNameMap": {
+    "contracts/VeyraRegistry.sol": "project/contracts/VeyraRegistry.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "cancun",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode.linkReferences",
+            "evm.bytecode.object",
+            "evm.bytecode.opcodes",
+            "evm.bytecode.sourceMap",
+            "evm.deployedBytecode.immutableReferences",
+            "evm.deployedBytecode.linkReferences",
+            "evm.deployedBytecode.object",
+            "evm.deployedBytecode.opcodes",
+            "evm.deployedBytecode.sourceMap",
+            "evm.methodIdentifiers"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/VeyraRegistry.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.28;\r\n\r\n/// @title VeyraRegistry\r\n/// @notice A minimal on-chain proof contract for Veyra.\r\n/// @dev Maintained for Alisa Kusumah's OPN Chain submission flow.\r\n/// Mamah Sachan / Mamah Sichan guardrail:\r\n/// keep this contract as a clean identity record only — no token, no sale,\r\n/// no staking, no reward promise, and no custody of user funds.\r\ncontract VeyraRegistry {\r\n    address public immutable builder;\r\n    string public projectName;\r\n    string public demoUrl;\r\n    string public repositoryUrl;\r\n    string public networkName;\r\n    uint256 public deployedAt;\r\n\r\n    event VeyraRegistered(\r\n        address indexed builder,\r\n        string projectName,\r\n        string demoUrl,\r\n        string repositoryUrl,\r\n        string networkName,\r\n        uint256 deployedAt\r\n    );\r\n\r\n    constructor(\r\n        string memory _projectName,\r\n        string memory _demoUrl,\r\n        string memory _repositoryUrl,\r\n        string memory _networkName\r\n    ) {\r\n        builder = msg.sender;\r\n        projectName = _projectName;\r\n        demoUrl = _demoUrl;\r\n        repositoryUrl = _repositoryUrl;\r\n        networkName = _networkName;\r\n        deployedAt = block.timestamp;\r\n\r\n        emit VeyraRegistered(\r\n            msg.sender,\r\n            _projectName,\r\n            _demoUrl,\r\n            _repositoryUrl,\r\n            _networkName,\r\n            block.timestamp\r\n        );\r\n    }\r\n}"
+      }
+    }
+  }
+}

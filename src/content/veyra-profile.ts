@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Veyra profile source of truth.
  * Maintained for Alisa Kusumah's OPN Chain submission flow.
  *
@@ -15,19 +15,19 @@ export const veyraProfile = {
     "Veyra frames Alisa Kusumah through a calm guardian dossier: identity first, references only when real, and testnet status kept honest.",
   builder: "Alisa Kusumah",
   season: "Season 1 Candidate",
-  status: "UI foundation in progress",
+  status: "Deployed to OPN Testnet",
   network: {
     name: "OPN Testnet",
     chainId: "984",
     contractName: "VeyraRegistry",
-    contractStatus: "Pending deployment",
-    contractAddress: "",
-    explorerUrl: "",
+    contractStatus: "Deployed",
+    contractAddress: "0xea08D46D74F42bFCC1BC16e19C1bE011Bce8122e",
+    explorerUrl: "https://testnet.iopn.tech/address/0xea08D46D74F42bFCC1BC16e19C1bE011Bce8122e",
     mainnetClaim: "Not claimed"
   },
   links: {
-    demoUrl: "",
-    repositoryUrl: ""
+    demoUrl: "https://veyra-six-phi.vercel.app",
+    repositoryUrl: "https://github.com/alisakusumah/veyra"
   },
   references: [
     {
@@ -44,7 +44,7 @@ export const veyraProfile = {
     },
     {
       label: "Contract",
-      value: "Pending deployment"
+      value: "0xea08D46D74F42bFCC1BC16e19C1bE011Bce8122e"
     }
   ],
   principles: [
@@ -75,13 +75,13 @@ export const veyraProfile = {
       phase: "Phase 2",
       title: "VeyraRegistry contract preparation",
       detail: "Prepare a small OPN Testnet registry contract only after the UI direction is approved.",
-      status: "Planned"
+      status: "Completed"
     },
     {
       phase: "Phase 3",
       title: "Repository and demo reference lock",
       detail: "Connect only real demo and repository URLs when they are ready.",
-      status: "Planned"
+      status: "Completed"
     },
     {
       phase: "Phase 4",
